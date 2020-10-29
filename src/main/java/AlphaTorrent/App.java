@@ -3,8 +3,19 @@
  */
 package AlphaTorrent;
 
+import org.checkerframework.checker.units.qual.C;
+
+import java.io.IOException;
+
 public class App {
     public static void main(String[] args) {
         System.out.println("Hello, world!");
+        Server server = new Server(4444, "src/main/java/AlphaTorrent/resources/target.txt");
+        Thread serverThread = new Thread(server);
+        serverThread.start();
+
+        Client client = new Client("127.0.0.1", 4444, "src/main/java/AlphaTorrent/resources/received.txt");
+        Thread clientThread = new Thread(client);
+        clientThread.start();
     }
 }
