@@ -3,10 +3,10 @@ package AlphaTorrent.neighbour;
 import lombok.Data;
 
 @Data
-public class Neigbour {
-    private String id;
+public class Neighbour {
+    private int id;
     private String host;
-    private String port;
+    private int port;
     private boolean hasFile;
     private byte[] bitfield;
     private boolean isInterested;
