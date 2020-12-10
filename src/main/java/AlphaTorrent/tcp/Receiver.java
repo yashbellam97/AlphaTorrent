@@ -1,7 +1,12 @@
 package AlphaTorrent.tcp;
 
 // A Java program for a Server
+import AlphaTorrent.app.InitializeHost;
+import AlphaTorrent.messages.action.Operation;
+import AlphaTorrent.messages.action.OperationFactory;
 import AlphaTorrent.messages.dto.ActualMessage;
+import AlphaTorrent.neighbour.Neighbour;
+import AlphaTorrent.state.Host;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.*;
@@ -23,30 +28,28 @@ public class Receiver extends Thread {
         while (true) {
             try {
                 Socket clientSock = ss.accept();
-                saveFile(clientSock);
+                onMessage(clientSock);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void saveFile(Socket clientSock) throws IOException {
+    private void onMessage(Socket clientSock) throws IOException {
         DataInputStream dis = new DataInputStream(clientSock.getInputStream());
-        byte[] buffer = new byte[4096];
-
-        int filesize = 10000232; // Send file size in separate msg
-        int read = 0;
-        int totalRead = 0;
-        int remaining = filesize;
+        byte[] buffer = new byte[94096];
         dis.read(buffer);
         ObjectMapper ob = new ObjectMapper();
         ActualMessage msg = ob.readValue(buffer, ActualMessage.class);
-
+        Operation op = OperationFactory.getOperation(msg.getType());
+        op.onMessage(msg);
         dis.close();
     }
 
-    public static void main(String[] args) {
-        Receiver fs = new Receiver(1988);
+    public static void initiate() {
+        int port = InitializeHost.host.getPort();
+        Receiver fs = new Receiver(port);
         fs.start();
+
     }
 }

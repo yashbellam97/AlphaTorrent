@@ -6,5 +6,5 @@ import AlphaTorrent.state.Host;
 
 public interface Operation {
 
-    void onMessage(ActualMessage actualMessage, Neighbour neighbour, Host host);
+    void onMessage(ActualMessage actualMessage);
 }

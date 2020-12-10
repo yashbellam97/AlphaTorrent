@@ -1,8 +1,8 @@
 package AlphaTorrent.utility;
 
-import AlphaTorrent.Logger;
 import AlphaTorrent.config.loader.ConfigLoader;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +14,7 @@ public class ChunksUtility {
     public static Map<Integer,byte[]> makeChunks(int peerId) {
         Map<Integer,byte[]> chunks = new HashMap<>();
         try {
-            byte[] allFileBytes = Files.readAllBytes(Paths.get("src/main/java/AlphaTorrent/resources/target.txt"));
+            byte[] allFileBytes = Files.readAllBytes(Paths.get("src/main/java/AlphaTorrent/resources/"+peerId+"/thefile"));
             int chunkSize = ConfigLoader.getCommon().getPieceSize();
             int mapIndex = 1;
             int index = 0;
@@ -27,11 +27,33 @@ public class ChunksUtility {
                 }
                 chunk[index++] = b;
             }
+            chunks.put(mapIndex++, chunk);
             Logger.write("Divided the file into " + mapIndex + " chunks...");
         } catch (IOException e) {
             System.out.println("Unable to read file");
             e.printStackTrace();
         }
         return chunks;
+    }
+
+    public static void generateFileFromBytes(Map<Integer, byte[]> bytes, int peerId) {
+        int size = 0;
+        for (byte[] arr : bytes.values()) {
+            size += arr.length;
+        }
+
+        byte[] fileBytes = new byte[size];
+        int index = 0;
+        for (byte[] arr : bytes.values()) {
+            for (byte b : arr) {
+                fileBytes[index++] = b;
+            }
+        }
+        try (FileOutputStream fos = new FileOutputStream("src/main/java/AlphaTorrent/resources/"+peerId+"/thefile")) {
+            fos.write(fileBytes);
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating a file from the byte array!");
+            e.printStackTrace();
+        }
     }
 }

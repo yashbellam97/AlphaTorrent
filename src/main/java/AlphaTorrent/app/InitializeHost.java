@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 
 public class InitializeHost {
 
-    public static Host initializeHost() {
+    public static Host host;
+
+    public static void initializeHost() {
         int noOfChunks = ConfigLoader.getCommon().getFileSize()/ConfigLoader.getCommon().getPieceSize();
         if (ConfigLoader.getCommon().getFileSize()%ConfigLoader.getCommon().getPieceSize() !=0)
             noOfChunks++;
@@ -27,9 +29,9 @@ public class InitializeHost {
 
         }
 //        final String hn = hostname;
-        final String hn = "localhost3";
+        final String hn = "lin114-05.cise.ufl.edu";
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst().get();
-        Host host = new Host();
+        host = new Host();
         host.setId(peerInfo.getPeerId());
         host.setPort(peerInfo.getPort());
         host.setHasFile(peerInfo.isHasFile());
@@ -48,7 +50,6 @@ public class InitializeHost {
                 .map(peer -> mapPeerToNeighbour(peer))
                 .collect(Collectors.toList());
         host.setNeighbours(neighbours);
-        return host;
     }
 
     private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo) {

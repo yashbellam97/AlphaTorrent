@@ -1,4 +1,4 @@
-package AlphaTorrent;
+package AlphaTorrent.utility;
 
 import java.io.File;
 import java.io.FileWriter;

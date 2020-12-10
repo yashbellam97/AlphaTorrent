@@ -4,16 +4,16 @@ import AlphaTorrent.messages.dto.MessageType;
 
 public class OperationFactory {
 
-    private Operation choke = new Choke();
-    private Operation unChoke = new Unchoke();
-    private Operation bitfield = new Bitfield();
-    private Operation have = new Have();
-    private Operation interested = new Interested();
-    private Operation notInterested = new NotInterested();
-    private Operation piece = new Piece();
-    private Operation request = new Request();
+    private static Operation choke = new Choke();
+    private static Operation unChoke = new Unchoke();
+    private static Operation bitfield = new Bitfield();
+    private static Operation have = new Have();
+    private static Operation interested = new Interested();
+    private static Operation notInterested = new NotInterested();
+    private static Operation piece = new Piece();
+    private static Operation request = new Request();
 
-    public Operation getOperation(MessageType messageType) {
+    public static Operation getOperation(MessageType messageType) {
         switch (messageType) {
             case CHOKE:
                 return choke;

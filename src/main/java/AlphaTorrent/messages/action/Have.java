@@ -6,7 +6,7 @@ import AlphaTorrent.state.Host;
 
 public class Have implements Operation{
     @Override
-    public void onMessage(ActualMessage actualMessage, Neighbour neighbour, Host host) {
-
+    public void onMessage(ActualMessage actualMessage) {
+        //do nothing
     }
 }
