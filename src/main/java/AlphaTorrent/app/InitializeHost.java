@@ -25,7 +25,7 @@ public class InitializeHost {
         } catch (Exception e) {
 
         }
-        final String hn = hostname;
+        final String hn = hostname + ".cise.ufl.edu";
         // final String hn = "lin114-05.cise.ufl.edu";
         System.out.println(hn);
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst()
