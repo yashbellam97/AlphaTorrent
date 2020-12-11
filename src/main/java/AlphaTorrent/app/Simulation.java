@@ -26,7 +26,6 @@ public class Simulation {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
             }
-
         }
     }
 

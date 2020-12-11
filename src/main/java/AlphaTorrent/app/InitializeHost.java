@@ -47,12 +47,13 @@ public class InitializeHost {
         }
         host.setBitfield(bitfield);
         host.setChunks(chunks);
+        final int nChunks = noOfChunks;
         List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
-                .map(peer -> mapPeerToNeighbour(peer)).collect(Collectors.toList());
+                .map(peer -> mapPeerToNeighbour(peer, nChunks)).collect(Collectors.toList());
         host.setNeighbours(neighbours);
     }
 
-    private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo) {
+    private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo, Integer noOfChunks) {
         Neighbour neighbour = new Neighbour();
         neighbour.setId(peerInfo.getPeerId());
         neighbour.setHost(peerInfo.getHostName());
@@ -63,6 +64,12 @@ public class InitializeHost {
         neighbour.setInterested(Boolean.FALSE);
         neighbour.setPeerInterested(Boolean.FALSE);
         neighbour.setChokedFromPeer(Boolean.TRUE);
+        byte[] bitfield = new byte[noOfChunks / 8 + 1];
+        if (peerInfo.isHasFile()) {
+            byte b = (byte) 0b11111111;
+            Arrays.fill(bitfield, b);
+        }
+        neighbour.setBitfield(bitfield);
         return neighbour;
     }
 
