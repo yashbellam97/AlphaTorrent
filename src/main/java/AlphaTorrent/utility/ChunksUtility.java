@@ -14,7 +14,7 @@ public class ChunksUtility {
     public static Map<Integer,byte[]> makeChunks(int peerId) {
         Map<Integer,byte[]> chunks = new HashMap<>();
         try {
-            byte[] allFileBytes = Files.readAllBytes(Paths.get("src/main/java/AlphaTorrent/resources/"+peerId+"/thefile"));
+            byte[] allFileBytes = Files.readAllBytes(Paths.get("../../AlphaTorrent/resources/"+peerId+"/thefile"));
             int chunkSize = ConfigLoader.getCommon().getPieceSize();
             int mapIndex = 1;
             int index = 0;
@@ -49,7 +49,7 @@ public class ChunksUtility {
                 fileBytes[index++] = b;
             }
         }
-        try (FileOutputStream fos = new FileOutputStream("src/main/java/AlphaTorrent/resources/"+peerId+"/thefile")) {
+        try (FileOutputStream fos = new FileOutputStream("../../AlphaTorrent/resources/"+peerId+"/thefile")) {
             fos.write(fileBytes);
         } catch (IOException e) {
             System.out.println("An error occurred while creating a file from the byte array!");

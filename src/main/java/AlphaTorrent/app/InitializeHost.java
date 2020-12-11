@@ -15,25 +15,27 @@ public class InitializeHost {
     public static Host host;
 
     public static void initializeHost() {
-        int noOfChunks = ConfigLoader.getCommon().getFileSize()/ConfigLoader.getCommon().getPieceSize();
-        if (ConfigLoader.getCommon().getFileSize()%ConfigLoader.getCommon().getPieceSize() !=0)
+        int noOfChunks = ConfigLoader.getCommon().getFileSize() / ConfigLoader.getCommon().getPieceSize();
+        if (ConfigLoader.getCommon().getFileSize() % ConfigLoader.getCommon().getPieceSize() != 0)
             noOfChunks++;
         String hostname = null;
         try {
             InetAddress ip = InetAddress.getLocalHost();
             hostname = ip.getHostName();
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         final String hn = hostname;
-//        final String hn = "lin114-05.cise.ufl.edu";
-        PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst().get();
+        // final String hn = "lin114-05.cise.ufl.edu";
+        System.out.println(hn);
+        PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst()
+                .get();
         host = new Host();
         host.setId(peerInfo.getPeerId());
         host.setPort(peerInfo.getPort());
         host.setHasFile(peerInfo.isHasFile());
         host.setNoOfChunks(noOfChunks);
-        byte[] bitfield = new byte[noOfChunks/8+1];
+        byte[] bitfield = new byte[noOfChunks / 8 + 1];
         Map<Integer, byte[]> chunks = new HashMap<>();
         if (peerInfo.isHasFile()) {
             byte b = (byte) 0b11111111;
@@ -45,11 +47,8 @@ public class InitializeHost {
         }
         host.setBitfield(bitfield);
         host.setChunks(chunks);
-        List<Neighbour> neighbours = ConfigLoader.getPeerList()
-                .stream()
-                .filter(e -> !e.getHostName().equals(hn))
-                .map(peer -> mapPeerToNeighbour(peer))
-                .collect(Collectors.toList());
+        List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
+                .map(peer -> mapPeerToNeighbour(peer)).collect(Collectors.toList());
         host.setNeighbours(neighbours);
     }
 
@@ -69,7 +68,7 @@ public class InitializeHost {
 
     private static Set<Integer> getMissingChunks(int size) {
         Set<Integer> set = new HashSet<>();
-        for (int i = 1; i<=size; i++) {
+        for (int i = 1; i <= size; i++) {
             set.add(i);
         }
         return set;

@@ -17,7 +17,7 @@ public class ConfigLoader {
     public static void loadConfig() {
         HashMap<String, String> configParams = new HashMap<>();
         try {
-            File commonConfig = new File("src/main/java/AlphaTorrent/resources/Common.cfg");
+            File commonConfig = new File("../../AlphaTorrent/resources/Common.cfg");
             Scanner scanner = new Scanner(commonConfig);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
@@ -43,7 +43,7 @@ public class ConfigLoader {
     private static void loadPeers() {
         peerInfoList = new ArrayList<>();
         try {
-            File peerConfig = new File("src/main/java/AlphaTorrent/resources/PeerInfo.cfg");
+            File peerConfig = new File("../../AlphaTorrent/resources/PeerInfo.cfg");
             Scanner scanner = new Scanner(peerConfig);
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();

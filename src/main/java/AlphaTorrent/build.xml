@@ -1,0 +1,14 @@
+<project default="compile" basedir=".">
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <javac srcdir="." includeantruntime="true" destdir="bin">
+	        <classpath location="lib/lombok.jar" />
+	        <classpath location="lib/jackson-core-2.12.0.jar" />
+	        <classpath location="lib/jackson-databind-2.12.0.jar" />
+	        <classpath location="lib/jackson-annotations-2.12.0.jar" />
+        </javac>
+    </target>
+    <target name="run" depends="compile">
+       <java classname="App" fork="true"></java>
+    </target>
+</project>
