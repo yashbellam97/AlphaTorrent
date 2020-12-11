@@ -12,10 +12,11 @@ import AlphaTorrent.utility.ChunksUtility;
 import AlphaTorrent.utility.Logger;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Hello, world!");
         InitializeHost.initializeHost();
         Receiver.initiate();
+        Thread.sleep(30000);
         Simulation.simulate();
     }
 }
