@@ -7,10 +7,7 @@ import AlphaTorrent.state.Host;
 import AlphaTorrent.utility.ChunksUtility;
 
 import java.net.InetAddress;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InitializeHost {
@@ -28,19 +25,23 @@ public class InitializeHost {
         }catch (Exception e) {
 
         }
-//        final String hn = hostname;
-        final String hn = "lin114-05.cise.ufl.edu";
+        final String hn = hostname;
+//        final String hn = "lin114-05.cise.ufl.edu";
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst().get();
         host = new Host();
         host.setId(peerInfo.getPeerId());
         host.setPort(peerInfo.getPort());
         host.setHasFile(peerInfo.isHasFile());
+        host.setNoOfChunks(noOfChunks);
         byte[] bitfield = new byte[noOfChunks/8+1];
         Map<Integer, byte[]> chunks = new HashMap<>();
         if (peerInfo.isHasFile()) {
             byte b = (byte) 0b11111111;
             Arrays.fill(bitfield, b);
             chunks = ChunksUtility.makeChunks(peerInfo.getPeerId());
+        } else {
+            host.setMissingChunks(getMissingChunks(host.getNoOfChunks()));
+            host.setRequestedChunks(new HashSet<>());
         }
         host.setBitfield(bitfield);
         host.setChunks(chunks);
@@ -64,5 +65,13 @@ public class InitializeHost {
         neighbour.setPeerInterested(Boolean.FALSE);
         neighbour.setChokedFromPeer(Boolean.TRUE);
         return neighbour;
+    }
+
+    private static Set<Integer> getMissingChunks(int size) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 1; i<=size; i++) {
+            set.add(i);
+        }
+        return set;
     }
 }

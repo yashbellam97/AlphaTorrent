@@ -23,6 +23,15 @@ public class Sender {
         dos.close();
     }
 
+    public static void send(final String host, final int port, final ActualMessage msg) {
+        try {
+            ObjectMapper ob = new ObjectMapper();
+            send(host, port, ob.writeValueAsBytes(msg));
+        } catch (Exception e) {
+
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         ObjectMapper ob = new ObjectMapper();
         ActualMessage msg = new ActualMessage();

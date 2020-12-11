@@ -17,17 +17,5 @@ public class App {
         InitializeHost.initializeHost();
         Receiver.initiate();
         Simulation.simulate();
-        Host host = InitializeHost.host;
-        ChunksUtility.generateFileFromBytes(host.getChunks(), 1002);
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),0));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),1));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),2));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),3));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),4));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),50));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),60));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),71));
-        System.out.println(ByteArrayExt.getBit(host.getBitfield(),70));
-
     }
 }

@@ -3,10 +3,7 @@ package AlphaTorrent.state;
 import AlphaTorrent.neighbour.Neighbour;
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 public class Host {
@@ -16,6 +13,9 @@ public class Host {
     private byte[] bitfield;
     private List<Neighbour> neighbours;
     private Map<Integer, byte[]> chunks = new HashMap<>();
+    private Integer noOfChunks;
+    private Set<Integer> missingChunks;
+    private Set<Integer> requestedChunks;
 
     public void addNeighbour(Neighbour neighbour) {
         if (neighbours == null)
