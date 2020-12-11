@@ -58,7 +58,7 @@ public class InitializeHost {
         neighbour.setHost(peerInfo.getHostName());
         neighbour.setPort(peerInfo.getPort());
         neighbour.setHasFile(peerInfo.isHasFile());
-        neighbour.setChoked(Boolean.TRUE);
+        neighbour.setChoked(Boolean.FALSE);
         neighbour.setPieceReceivedInLastInterval(0);
         neighbour.setInterested(Boolean.FALSE);
         neighbour.setPeerInterested(Boolean.FALSE);
