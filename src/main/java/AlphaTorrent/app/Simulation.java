@@ -22,7 +22,7 @@ public class Simulation {
                 requestChunks(host);
             }
 //            sendChunks(host);
-            if (!host.isHasFile() && host.getChunks().size() == host.getNoOfChunks()) {
+            if (!host.isHasFile() && host.getChunks().size() == 67) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
             }
