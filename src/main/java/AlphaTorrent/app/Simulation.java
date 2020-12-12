@@ -54,6 +54,8 @@ public class Simulation {
 
     private static void sendChunks(Host host) {
         Queue<Task> tasks = TaskManager.tasks;
+        System.out.println("No of chunks with Manager:"+ tasks.size());
+
         while (!tasks.isEmpty()) {
             Task task = tasks.remove();
             ActualMessage message = new ActualMessage();
@@ -67,6 +69,7 @@ public class Simulation {
                     .findFirst()
                     .get();
             Sender.send(neighbour.getHost(), neighbour.getPort(), message);
+            System.out.println("Simulation: Send chunks : Piece sent with id: "+message.getLength()+" to: "+ neighbour.getId());
         }
     }
 
