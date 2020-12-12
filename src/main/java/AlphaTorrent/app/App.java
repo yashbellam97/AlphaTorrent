@@ -4,7 +4,10 @@
 package AlphaTorrent.app;
 
 import AlphaTorrent.app.InitializeHost;
+import AlphaTorrent.config.dto.Common;
 import AlphaTorrent.config.loader.ConfigLoader;
+import AlphaTorrent.schedule.ChokeUnchoke;
+import AlphaTorrent.schedule.OptimisticallyUnchoke;
 import AlphaTorrent.state.Host;
 import AlphaTorrent.tcp.Receiver;
 import AlphaTorrent.utility.ByteArrayExt;
@@ -16,8 +19,14 @@ public class App {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Hello, world!");
         System.out.println("Hello, world!");
+        Common commonConfig = ConfigLoader.getCommon();
         InitializeHost.initializeHost();
         Receiver.initiate();
+        ChokeUnchoke chokeUnchoke = new ChokeUnchoke(commonConfig.getUnchokingInterval(),commonConfig.getNumberOfPreferredNeighbors());
+        chokeUnchoke.start();
+        OptimisticallyUnchoke optimisticallyUnchoke = new OptimisticallyUnchoke(commonConfig.getOptimisticUnchokingInterval());
+        chokeUnchoke.start();
+
 //        Thread.sleep(30000);
         Simulation.simulate();
     }
