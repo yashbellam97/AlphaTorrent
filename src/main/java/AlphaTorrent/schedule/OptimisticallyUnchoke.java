@@ -19,8 +19,8 @@ public class OptimisticallyUnchoke extends Thread{
 
     public void run() {
         while (true) {
-            optimisticallyUnchoke();
             try {
+                optimisticallyUnchoke();
                 Thread.sleep(interval * 1000);
             } catch (Exception e) {
 

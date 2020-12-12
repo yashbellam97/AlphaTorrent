@@ -27,8 +27,8 @@ public class ChokeUnchoke extends Thread{
 
     public void run() {
         while (true) {
-            chokeAndUnchoke(concurrentConnections);
             try {
+                chokeAndUnchoke(concurrentConnections);
                 Thread.sleep(interval * 1000);
             } catch (Exception e) {
 
