@@ -19,7 +19,7 @@ public class Sender {
             dos = new DataOutputStream(s.getOutputStream());
             dos.write(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         dos.close();
     }
