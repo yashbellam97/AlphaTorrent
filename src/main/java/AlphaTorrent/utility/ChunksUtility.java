@@ -37,6 +37,7 @@ public class ChunksUtility {
     }
 
     public static void generateFileFromBytes(Map<Integer, byte[]> bytes, int peerId) {
+        System.out.println("Generate file");
         int size = 0;
         for (byte[] arr : bytes.values()) {
             size += arr.length;
