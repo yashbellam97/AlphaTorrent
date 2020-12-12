@@ -3,6 +3,7 @@ package AlphaTorrent.tcp;
 // A Java program for a Client
 import AlphaTorrent.messages.dto.ActualMessage;
 import AlphaTorrent.messages.dto.MessageType;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.*;
@@ -26,6 +27,10 @@ public class Sender {
     public static void send(final String host, final int port, final ActualMessage msg) {
         try {
             ObjectMapper ob = new ObjectMapper();
+            ob.configure(
+                    JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS,
+                    true
+            );
             send(host, port, ob.writeValueAsBytes(msg));
         } catch (Exception e) {
 
