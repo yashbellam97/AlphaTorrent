@@ -50,7 +50,7 @@ public class ChunksUtility {
                 fileBytes[index++] = b;
             }
         }
-        try (FileOutputStream fos = new FileOutputStream("AlphaTorrent/resources/"+peerId+"/thefile")) {
+        try (FileOutputStream fos = new FileOutputStream("resources/"+peerId+"/thefile")) {
             fos.write(fileBytes);
         } catch (IOException e) {
             System.out.println("An error occurred while creating a file from the byte array!");
