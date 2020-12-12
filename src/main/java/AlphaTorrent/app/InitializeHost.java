@@ -32,6 +32,7 @@ public class InitializeHost {
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst()
         .get();
         host = new Host();
+        System.out.println("Hostname: " + hn);
         Logger.write("Hostname: " + hn, host.getId());
         host.setId(peerInfo.getPeerId());
         host.setPort(peerInfo.getPort());
