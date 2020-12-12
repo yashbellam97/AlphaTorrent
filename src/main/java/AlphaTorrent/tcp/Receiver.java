@@ -54,9 +54,11 @@ public class Receiver extends Thread {
     }
 
     public static void initiate() {
-        int port = InitializeHost.host.getPort();
+        Host host = InitializeHost.host;
+        int port = host.getPort();
         Logger.write("Initialized receiver", host.getId());
         Receiver fs = new Receiver(port);
+        fs.setDaemon(Boolean.TRUE);
         fs.start();
 
     }

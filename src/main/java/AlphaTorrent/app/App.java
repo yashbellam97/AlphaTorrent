@@ -21,9 +21,11 @@ public class App {
         InitializeHost.initializeHost();
         Receiver.initiate();
         ChokeUnchoke chokeUnchoke = new ChokeUnchoke(commonConfig.getUnchokingInterval(),commonConfig.getNumberOfPreferredNeighbors());
+        chokeUnchoke.setDaemon(Boolean.TRUE);
         chokeUnchoke.start();
         OptimisticallyUnchoke optimisticallyUnchoke = new OptimisticallyUnchoke(commonConfig.getOptimisticUnchokingInterval());
-        chokeUnchoke.start();
+        optimisticallyUnchoke.setDaemon(Boolean.TRUE);
+        optimisticallyUnchoke.start();
 
 //        Thread.sleep(30000);
         Simulation.simulate();

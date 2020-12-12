@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.Deflater;
 
 public class ChokeUnchoke extends Thread{
 
