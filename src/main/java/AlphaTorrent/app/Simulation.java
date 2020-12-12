@@ -18,13 +18,14 @@ public class Simulation {
 
     public static void simulate(){
         Host host = InitializeHost.host;
+        Logger.write("Starting simulation...", host.getId());
         while (true) {
             if (!host.isHasFile() && !host.getMissingChunks().isEmpty()) {
                 requestChunks(host);
             }
 ////            sendChunks(host);
 //            // System.out.println("Chunks" + host.getChunks().size());
-            Logger.write("Chunks" + host.getChunks().size());
+            Logger.write("Chunks" + host.getChunks().size(), host.getId());
             if (!host.isHasFile() && host.getChunks().size() == 67) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
@@ -50,7 +51,7 @@ public class Simulation {
                     message.setSenderId(host.getId());
                     Sender.send(neighbour.getHost(), neighbour.getPort(), message);
                     System.out.println("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId());
-                    Logger.write("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId());
+                    Logger.write("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId(), host.getId);
                 }
             }
         }

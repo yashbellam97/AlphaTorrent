@@ -21,6 +21,6 @@ public class Piece implements Operation{
         host.getRequestedChunks().remove(actualMessage.getLength());
         ByteArrayExt.setBit(host.getBitfield(), actualMessage.getLength(), Boolean.TRUE);
         System.out.println("Piece received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
-        Logger.write("Piece received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
+        Logger.write("Piece received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId(), neighbour.getId());
     }
 }

@@ -14,8 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App {
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Hello, world!");
-        System.out.println("Hello, world!");
         InitializeHost.initializeHost();
         Receiver.initiate();
 //        Thread.sleep(30000);

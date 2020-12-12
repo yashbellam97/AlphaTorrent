@@ -7,6 +7,8 @@ import AlphaTorrent.messages.action.OperationFactory;
 import AlphaTorrent.messages.dto.ActualMessage;
 import AlphaTorrent.neighbour.Neighbour;
 import AlphaTorrent.state.Host;
+import AlphaTorrent.utility.Logger;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -53,6 +55,7 @@ public class Receiver extends Thread {
 
     public static void initiate() {
         int port = InitializeHost.host.getPort();
+        Logger.write("Initialized receiver", host.getId());
         Receiver fs = new Receiver(port);
         fs.start();
 

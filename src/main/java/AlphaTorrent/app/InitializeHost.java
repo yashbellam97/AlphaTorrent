@@ -29,10 +29,10 @@ public class InitializeHost {
         final String hn = hostname + ".cise.ufl.edu";
         // final String hn = "lin114-05.cise.ufl.edu";
         // System.out.println(hn);
-        Logger.write("Hostname: " + hn);
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst()
-                .get();
+        .get();
         host = new Host();
+        Logger.write("Hostname: " + hn, host.getId());
         host.setId(peerInfo.getPeerId());
         host.setPort(peerInfo.getPort());
         host.setHasFile(peerInfo.isHasFile());
