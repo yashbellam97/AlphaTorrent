@@ -19,7 +19,7 @@ public class Request implements Operation{
                 .filter(neigh -> actualMessage.getSenderId() == neigh.getId())
                 .findFirst()
                 .get();
-        // System.out.println("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
+         System.out.println("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
         Logger.write("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
 //        TaskManager.tasks.add(new Task(actualMessage.getSenderId(), actualMessage.getLength()));
 //        Task task = tasks.remove();

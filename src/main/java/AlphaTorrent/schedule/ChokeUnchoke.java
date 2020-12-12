@@ -17,10 +17,12 @@ public class ChokeUnchoke {
             }
         });
         for(int i = 0; i< neighbours.size(); i++) {
-            if (i<concurrentConnections)
+            if (i<concurrentConnections) {
                 neighbours.get(i).setChoked(Boolean.FALSE);
-            else
+            }
+            else {
                 neighbours.get(i).setChoked(Boolean.TRUE);
+            }
         }
         Random random = new Random();
         Integer  optimisticallyUnchokedNeighbor = random.nextInt(neighbours.size()-concurrentConnections);
