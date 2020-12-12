@@ -18,7 +18,7 @@ public class App {
         System.out.println("Hello, world!");
         InitializeHost.initializeHost();
         Receiver.initiate();
-        Thread.sleep(30000);
+//        Thread.sleep(30000);
         Simulation.simulate();
     }
 }
