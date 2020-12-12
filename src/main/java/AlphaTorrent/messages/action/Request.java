@@ -11,7 +11,11 @@ public class Request implements Operation{
     @Override
     public void onMessage(ActualMessage actualMessage) {
         Host host = InitializeHost.host;
-        Neighbour neighbour = host.getNeighbours().get(actualMessage.getSenderId());
+        Neighbour neighbour = host.getNeighbours()
+                .stream()
+                .filter(neigh -> actualMessage.getSenderId() == neigh.getId())
+                .findFirst()
+                .get();
         System.out.println("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
         TaskManager.tasks.add(new Task(actualMessage.getSenderId(), actualMessage.getLength()));
     }

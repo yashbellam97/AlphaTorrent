@@ -9,7 +9,11 @@ public class Interested implements Operation{
     @Override
     public void onMessage(ActualMessage actualMessage) {
         Host host = InitializeHost.host;
-        Neighbour neighbour = host.getNeighbours().get(actualMessage.getSenderId());
+        Neighbour neighbour = host.getNeighbours()
+                .stream()
+                .filter(neigh -> actualMessage.getSenderId() == neigh.getId())
+                .findFirst()
+                .get();
         neighbour.setPeerInterested(Boolean.TRUE);
     }
 }

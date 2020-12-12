@@ -10,7 +10,11 @@ public class Piece implements Operation{
     @Override
     public void onMessage(ActualMessage actualMessage) {
         Host host = InitializeHost.host;
-        Neighbour neighbour = host.getNeighbours().get(actualMessage.getSenderId());
+        Neighbour neighbour = host.getNeighbours()
+                .stream()
+                .filter(neigh -> actualMessage.getSenderId() == neigh.getId())
+                .findFirst()
+                .get();
         host.getChunks().put(actualMessage.getLength(), actualMessage.getPayload());
         neighbour.setPieceReceivedInLastInterval(neighbour.getPieceReceivedInLastInterval()+1);
         host.getRequestedChunks().remove(actualMessage.getLength());
