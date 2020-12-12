@@ -28,7 +28,7 @@ public class ConfigLoader {
             scanner.close();
         } catch (FileNotFoundException e) {
             // System.out.println("An error occurred. File not found!");
-            Logger.write("An error occurred. File not found!");
+            // Logger.write("An error occurred. File not found!");
             e.printStackTrace();
         }
 
@@ -55,7 +55,7 @@ public class ConfigLoader {
             scanner.close();
         } catch (FileNotFoundException e) {
             // System.out.println("An error occurred. File not found!");
-            Logger.write("An error occurred. File not found!");
+            // Logger.write("An error occurred. File not found!");
             e.printStackTrace();
         }
     }

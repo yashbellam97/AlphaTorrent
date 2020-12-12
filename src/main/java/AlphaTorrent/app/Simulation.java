@@ -51,7 +51,7 @@ public class Simulation {
                     message.setSenderId(host.getId());
                     Sender.send(neighbour.getHost(), neighbour.getPort(), message);
                     System.out.println("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId());
-                    Logger.write("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId(), host.getId);
+                    Logger.write("Piece requested with id: "+message.getLength()+" from: "+ neighbour.getId(), host.getId());
                 }
             }
         }

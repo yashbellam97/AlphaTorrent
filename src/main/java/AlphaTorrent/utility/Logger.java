@@ -17,7 +17,7 @@ public class Logger {
             FileWriter logWriter = new FileWriter("resources/" + peerID + "log.txt", true);
             FileWriter logWriterCopy = new FileWriter("resources/log.txt", true);
             if (details.startsWith("Chunks")) logWriterCopy.write(details + "\n");
-            else logWriter.write(details + "\n");
+            else logWriter.write("[" + new java.util.Date() + "] " + details + "\n");
             logWriter.close();
             logWriterCopy.close();
         } catch (IOException e) {
