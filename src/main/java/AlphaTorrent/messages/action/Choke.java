@@ -4,6 +4,7 @@ import AlphaTorrent.app.InitializeHost;
 import AlphaTorrent.messages.dto.ActualMessage;
 import AlphaTorrent.neighbour.Neighbour;
 import AlphaTorrent.state.Host;
+import AlphaTorrent.utility.Logger;
 
 public class Choke implements Operation{
     @Override
@@ -15,5 +16,6 @@ public class Choke implements Operation{
                 .findFirst()
                 .get();
         neighbour.setChokedFromPeer(Boolean.TRUE);
+        Logger.write("Received choke message", neighbour.getId());
     }
 }

@@ -17,8 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App {
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Hello, world!");
-        System.out.println("Hello, world!");
         Common commonConfig = ConfigLoader.getCommon();
         InitializeHost.initializeHost();
         Receiver.initiate();
