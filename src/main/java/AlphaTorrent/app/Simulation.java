@@ -54,7 +54,8 @@ public class Simulation {
 
     private static void sendChunks(Host host) {
         Queue<Task> tasks = TaskManager.tasks;
-        System.out.println("No of chunks with Manager:"+ tasks.size());
+        if (!tasks.isEmpty())
+            System.out.println("No of chunks with Manager:"+ tasks.size());
 
         while (!tasks.isEmpty()) {
             Task task = tasks.remove();
