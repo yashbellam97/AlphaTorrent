@@ -14,7 +14,7 @@ public class ChunksUtility {
     public static Map<Integer,byte[]> makeChunks(int peerId) {
         Map<Integer,byte[]> chunks = new HashMap<>();
         try {
-            byte[] allFileBytes = Files.readAllBytes(Paths.get("../../AlphaTorrent/resources/"+peerId+"/thefile"));
+            byte[] allFileBytes = Files.readAllBytes(Paths.get("AlphaTorrent/resources/"+peerId+"/thefile"));
             int chunkSize = ConfigLoader.getCommon().getPieceSize();
             int mapIndex = 1;
             int index = 0;
