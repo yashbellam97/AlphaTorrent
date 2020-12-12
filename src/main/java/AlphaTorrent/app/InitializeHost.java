@@ -5,6 +5,7 @@ import AlphaTorrent.config.loader.ConfigLoader;
 import AlphaTorrent.neighbour.Neighbour;
 import AlphaTorrent.state.Host;
 import AlphaTorrent.utility.ChunksUtility;
+import AlphaTorrent.utility.Logger;
 
 import java.net.InetAddress;
 import java.util.*;
@@ -27,7 +28,8 @@ public class InitializeHost {
         }
         final String hn = hostname + ".cise.ufl.edu";
         // final String hn = "lin114-05.cise.ufl.edu";
-        System.out.println(hn);
+        // System.out.println(hn);
+        Logger.write("Hostname: " + hn);
         PeerInfo peerInfo = ConfigLoader.getPeerList().stream().filter(e -> e.getHostName().equals(hn)).findFirst()
                 .get();
         host = new Host();

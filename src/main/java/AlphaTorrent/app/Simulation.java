@@ -9,6 +9,7 @@ import AlphaTorrent.task.TaskManager;
 import AlphaTorrent.tcp.Sender;
 import AlphaTorrent.utility.ByteArrayExt;
 import AlphaTorrent.utility.ChunksUtility;
+import AlphaTorrent.utility.Logger;
 
 import javax.swing.text.html.Option;
 import java.util.*;
@@ -22,7 +23,8 @@ public class Simulation {
                 requestChunks(host);
             }
 //            sendChunks(host);
-            System.out.println("Chunks" + host.getChunks().size());
+            // System.out.println("Chunks" + host.getChunks().size());
+            Logger.write("Chunks" + host.getChunks().size());
             if (!host.isHasFile() && host.getChunks().size() == 67) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
@@ -47,7 +49,8 @@ public class Simulation {
                     message.setLength(chunkId);
                     message.setSenderId(host.getId());
                     Sender.send(neighbour.getHost(), neighbour.getPort(), message);
-                    System.out.println("Piece requested with id: "+message.getLength()+" to: "+ neighbour.getId());
+                    // System.out.println("Piece requested with id: "+message.getLength()+" to: "+ neighbour.getId());
+                    Logger.write("Piece requested with id: "+message.getLength()+" to: "+ neighbour.getId());
                 }
             }
         }
@@ -56,7 +59,8 @@ public class Simulation {
     private static void sendChunks(Host host) {
         Queue<Task> tasks = TaskManager.tasks;
         if (!tasks.isEmpty())
-            System.out.println("No of chunks with Manager:"+ tasks.size());
+            // System.out.println("No of chunks with Manager:"+ tasks.size());
+            Logger.write("No of chunks with Manager:"+ tasks.size());
 
         while (!tasks.isEmpty()) {
             Task task = tasks.remove();
@@ -71,7 +75,8 @@ public class Simulation {
                     .findFirst()
                     .get();
             Sender.send(neighbour.getHost(), neighbour.getPort(), message);
-            System.out.println("Simulation: Send chunks : Piece sent with id: "+message.getLength()+" to: "+ neighbour.getId());
+            // System.out.println("Simulation: Send chunks : Piece sent with id: "+message.getLength()+" to: "+ neighbour.getId());
+            Logger.write("Simulation: Send chunks : Piece sent with id: "+message.getLength()+" to: "+ neighbour.getId());
         }
     }
 

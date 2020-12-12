@@ -30,14 +30,16 @@ public class ChunksUtility {
             chunks.put(mapIndex++, chunk);
             Logger.write("Divided the file into " + mapIndex + " chunks...");
         } catch (IOException e) {
-            System.out.println("Unable to read file");
+            // System.out.println("Unable to read file");
+            Logger.write("Unable to read file");
             e.printStackTrace();
         }
         return chunks;
     }
 
     public static void generateFileFromBytes(Map<Integer, byte[]> bytes, int peerId) {
-        System.out.println("Generate file");
+        // System.out.println("Generate file");
+        Logger.write("Generate file");
         int size = 0;
         for (byte[] arr : bytes.values()) {
             size += arr.length;
@@ -53,7 +55,8 @@ public class ChunksUtility {
         try (FileOutputStream fos = new FileOutputStream("resources/"+peerId+"/thefile")) {
             fos.write(fileBytes);
         } catch (IOException e) {
-            System.out.println("An error occurred while creating a file from the byte array!");
+            // System.out.println("An error occurred while creating a file from the byte array!");
+            Logger.write("An error occurred while creating a file from the byte array!");
             e.printStackTrace();
         }
     }

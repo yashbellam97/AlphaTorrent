@@ -2,6 +2,7 @@ package AlphaTorrent.config.loader;
 
 import AlphaTorrent.config.dto.Common;
 import AlphaTorrent.config.dto.PeerInfo;
+import AlphaTorrent.utility.Logger;
 import lombok.Data;
 
 import java.io.File;
@@ -26,7 +27,8 @@ public class ConfigLoader {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred. File not found!");
+            // System.out.println("An error occurred. File not found!");
+            Logger.write("An error occurred. File not found!");
             e.printStackTrace();
         }
 
@@ -52,7 +54,8 @@ public class ConfigLoader {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred. File not found!");
+            // System.out.println("An error occurred. File not found!");
+            Logger.write("An error occurred. File not found!");
             e.printStackTrace();
         }
     }
