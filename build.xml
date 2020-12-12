@@ -1,0 +1,43 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <property name="lib.dir"     value="lib"/>
+    <property name="main-class"  value="AlphaTorrent.app.App"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+<target name="compile">
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes" classpathref="classpath">
+        <classpath location="lib/lombok.jar" />
+        <classpath location="lib/jackson-core-2.12.0.jar" />
+        <classpath location="lib/jackson-databind-2.12.0.jar" />
+        <classpath location="lib/jackson-annotations-2.12.0.jar" />
+    </javac>
+</target>
+
+<target name="jar">
+    <mkdir dir="build/jar"/>
+    <jar destfile="build/jar/AlphaTorrent.jar" basedir="build/classes">
+        <manifest>
+            <attribute name="Main-Class" value="${main-class}"/>
+        </manifest>
+    </jar>
+</target>
+
+<target name="run" depends="jar">
+    <java fork="true" classname="${main-class}">
+        <classpath>
+            <path refid="classpath"/>
+            <path location="${jar.dir}/AlphaTorrent.jar"/>
+        </classpath>
+    </java>
+</target>
+
+</project>

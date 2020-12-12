@@ -10,9 +10,11 @@ import AlphaTorrent.tcp.Receiver;
 import AlphaTorrent.utility.ByteArrayExt;
 import AlphaTorrent.utility.ChunksUtility;
 import AlphaTorrent.utility.Logger;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App {
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("Hello, world!");
         System.out.println("Hello, world!");
         InitializeHost.initializeHost();
         Receiver.initiate();

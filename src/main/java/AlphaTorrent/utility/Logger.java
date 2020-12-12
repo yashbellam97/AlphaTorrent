@@ -8,11 +8,11 @@ public class Logger {
     public static void write(String details) {
         File logFile;
         try {
-            logFile = new File("../../AlphaTorrent/resources/log.txt");
+            logFile = new File("resources/log.txt");
             if (logFile.createNewFile()) {
                 System.out.println("Log file created!");
             }
-            FileWriter logWriter = new FileWriter("../../AlphaTorrent/resources/log.txt", true);
+            FileWriter logWriter = new FileWriter("resources/log.txt", true);
             logWriter.write(details + "\n");
             logWriter.close();
         } catch (IOException e) {
