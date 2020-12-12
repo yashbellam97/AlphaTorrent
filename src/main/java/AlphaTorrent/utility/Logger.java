@@ -12,7 +12,7 @@ public class Logger {
             logFile = new File("resources/" + peerID +  "log.txt");
             logFileCopy = new File("resources/log.txt");
             if (logFile.createNewFile()) {
-                System.out.println("Log file created!");
+                System.out.println("[" + new java.util.Date() + "] " + "Log file created!");
             }
             FileWriter logWriter = new FileWriter("resources/" + peerID + "log.txt", true);
             FileWriter logWriterCopy = new FileWriter("resources/log.txt", true);
