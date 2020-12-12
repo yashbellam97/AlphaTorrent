@@ -46,6 +46,7 @@ public class Simulation {
                     message.setLength(chunkId);
                     message.setSenderId(host.getId());
                     Sender.send(neighbour.getHost(), neighbour.getPort(), message);
+                    System.out.println("Piece sent with id: "+message.getLength()+" to: "+ neighbour.getId());
                 }
             }
         }
