@@ -54,7 +54,7 @@ public class Simulation {
             }
 
             if (host.isHasFile() && everyNeighbourHas) break;
-            if (System.currentTimeMillis() > st + 15000) break;
+            if (System.currentTimeMillis() > st + 20000) break;
         }
     }
 
