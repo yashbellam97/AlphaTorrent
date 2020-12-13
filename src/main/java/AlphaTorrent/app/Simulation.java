@@ -26,7 +26,7 @@ public class Simulation {
             //// sendChunks(host);
             // // System.out.println("Chunks" + host.getChunks().size());
             Logger.write("Chunks" + host.getChunks().size(), host.getId());
-            if (!host.isHasFile() && host.getChunks().size() == 67) {
+            if (!host.isHasFile() && host.getChunks().size() == host.getNoOfChunks()) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
 
