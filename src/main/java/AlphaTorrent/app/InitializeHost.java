@@ -9,6 +9,7 @@ import AlphaTorrent.utility.Logger;
 
 import java.net.InetAddress;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class InitializeHost {
