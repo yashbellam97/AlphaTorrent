@@ -14,6 +14,9 @@ public class Logger {
             if (logFile.createNewFile()) {
                 System.out.println("[" + new java.util.Date() + "] " + "Log file created!");
             }
+            if (logFileCopy.createNewFile()) {
+                System.out.println("[" + new java.util.Date() + "] " + "Log file created!");
+            }
             FileWriter logWriter = new FileWriter("resources/" + peerID + "/log.txt", true);
             FileWriter logWriterCopy = new FileWriter("resources/log.txt", true);
             if (details.startsWith("Chunks")) logWriterCopy.write(details + "\n");
