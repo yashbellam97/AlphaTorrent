@@ -52,7 +52,7 @@ public class InitializeHost {
         host.setChunks(chunks);
         final int nChunks = noOfChunks;
         List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
-                .map(peer -> mapPeerToNeighbour(peer, nChunks)).collect(Collectors.toList());
+                .map(peer -> mapPeerToNeighbour(peer, nChunks)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         host.setNeighbours(neighbours);
     }
 
