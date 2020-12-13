@@ -19,6 +19,7 @@ public class Simulation {
     public static void simulate() {
         Host host = InitializeHost.host;
         Logger.write("Starting simulation...", host.getId());
+        Long st = System.currentTimeMillis();
         while (true) {
             if (!host.isHasFile() && !host.getMissingChunks().isEmpty()) {
                 requestChunks(host);
@@ -53,6 +54,7 @@ public class Simulation {
             }
 
             if (host.isHasFile() && everyNeighbourHas) break;
+            if (System.currentTimeMillis() > st + 15000) break;
         }
     }
 
