@@ -2,10 +2,15 @@ package AlphaTorrent.app;
 
 import AlphaTorrent.config.dto.PeerInfo;
 import AlphaTorrent.config.loader.ConfigLoader;
+import AlphaTorrent.messages.action.Handshake;
+import AlphaTorrent.messages.dto.ActualMessage;
+import AlphaTorrent.messages.dto.MessageType;
 import AlphaTorrent.neighbour.Neighbour;
 import AlphaTorrent.state.Host;
+import AlphaTorrent.tcp.Sender;
 import AlphaTorrent.utility.ChunksUtility;
 import AlphaTorrent.utility.Logger;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.InetAddress;
 import java.util.*;
@@ -53,12 +58,22 @@ public class InitializeHost {
         host.setBitfield(bitfield);
         host.setChunks(chunks);
         final int nChunks = noOfChunks;
+        final ActualMessage handshakeMessage = getHandshakeMessage();
+        final ActualMessage bitfieldMessage = getBitfiledMessage(bitfield);
         List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
-                .map(peer -> mapPeerToNeighbour(peer, nChunks)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+                .map(peer -> mapPeerToNeighbour(peer, nChunks, handshakeMessage, bitfieldMessage)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         host.setNeighbours(neighbours);
+
+        ObjectMapper ob = new ObjectMapper();
+        System.out.println("Peer configuration set");
+        try {
+            System.out.println(ob.writeValueAsString(host));
+        } catch(Exception e) {
+
+        }
     }
 
-    private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo, Integer noOfChunks) {
+    private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo, Integer noOfChunks, ActualMessage handshakeMessage, ActualMessage bitfieldMessage) {
         Neighbour neighbour = new Neighbour();
         neighbour.setId(peerInfo.getPeerId());
         neighbour.setHost(peerInfo.getHostName());
@@ -75,6 +90,10 @@ public class InitializeHost {
             Arrays.fill(bitfield, b);
         }
         neighbour.setBitfield(bitfield);
+
+        Sender.send(neighbour.getHost(),neighbour.getPort(),handshakeMessage);
+        Sender.send(neighbour.getHost(),neighbour.getPort(),bitfieldMessage);
+
         return neighbour;
     }
 
@@ -84,5 +103,20 @@ public class InitializeHost {
             set.add(i);
         }
         return set;
+    }
+
+    private static ActualMessage getHandshakeMessage() {
+        ActualMessage message = new ActualMessage();
+        message.setType(MessageType.HANDSHAKE);
+        UUID uuid = UUID.randomUUID();
+        return message;
+    }
+
+    private static ActualMessage getBitfiledMessage(byte[] bitfield) {
+        ActualMessage message = new ActualMessage();
+        message.setType(MessageType.BITFIELD);
+        message.setPayload(bitfield);
+        UUID uuid = UUID.randomUUID();
+        return message;
     }
 }

@@ -3,6 +3,7 @@ package AlphaTorrent.config.loader;
 import AlphaTorrent.config.dto.Common;
 import AlphaTorrent.config.dto.PeerInfo;
 import AlphaTorrent.utility.Logger;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 import java.io.File;
@@ -40,6 +41,13 @@ public class ConfigLoader {
                 Integer.parseInt(configParams.get("FileSize")),
                 Integer.parseInt(configParams.get("PieceSize"))
             );
+        ObjectMapper ob = new ObjectMapper();
+        System.out.println("Successfully loaded common config");
+        try {
+            System.out.println(ob.writeValueAsString(common));
+        } catch(Exception e) {
+
+        }
     }
 
     private static void loadPeers() {
@@ -57,6 +65,13 @@ public class ConfigLoader {
             // System.out.println("An error occurred. File not found!");
             // Logger.write("An error occurred. File not found!");
             e.printStackTrace();
+        }
+        ObjectMapper ob = new ObjectMapper();
+        System.out.println("Successfully loaded peer config");
+        try {
+            System.out.println(ob.writeValueAsString(peerInfoList));
+        } catch(Exception e) {
+
         }
     }
 
