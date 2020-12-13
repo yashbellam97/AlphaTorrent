@@ -6,6 +6,8 @@ import AlphaTorrent.messages.dto.MessageType;
 import AlphaTorrent.neighbour.Neighbour;
 import AlphaTorrent.state.Host;
 import AlphaTorrent.tcp.Sender;
+import AlphaTorrent.utility.Logger;
+
 import java.util.List;
 import java.util.Random;
 
@@ -40,5 +42,6 @@ public class OptimisticallyUnchoke extends Thread{
         message.setType(MessageType.UNCHOKE);
         message.setSenderId(host.getId());
         Sender.send(neighbour.getHost(), neighbour.getPort(), message);
+        Logger.write("Optimistically unchoked" + neighbour.getId(), host.getId());
     }
 }

@@ -33,7 +33,7 @@ public class Receiver extends Thread {
                 Socket clientSock = ss.accept();
                 onMessage(clientSock);
             } catch (IOException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
         }
     }

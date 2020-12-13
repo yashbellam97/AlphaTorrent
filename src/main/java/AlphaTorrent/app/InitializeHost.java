@@ -49,6 +49,7 @@ public class InitializeHost {
             byte b = (byte) 0b11111111;
             Arrays.fill(bitfield, b);
             chunks = ChunksUtility.makeChunks(peerInfo.getPeerId());
+            host.setMissingChunks(new HashSet<>());
         } else {
             host.setMissingChunks(getMissingChunks(host.getNoOfChunks()));
             host.setRequestedChunks(new HashSet<>());

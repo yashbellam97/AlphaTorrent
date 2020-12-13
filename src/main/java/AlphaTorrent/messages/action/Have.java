@@ -26,6 +26,10 @@ public class Have implements Operation{
         else
             message.setType(MessageType.NOTINTERESTED);
         message.setSenderId(host.getId());
+
+        neighbour.setHasFile(true);
+
+
         Sender.send(neighbour.getHost(), neighbour.getPort(), message);
         //do nothing
         Logger.write("Received have message from neighbour: " + neighbour.getId(), host.getId());
