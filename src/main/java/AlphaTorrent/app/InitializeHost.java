@@ -58,8 +58,8 @@ public class InitializeHost {
         host.setBitfield(bitfield);
         host.setChunks(chunks);
         final int nChunks = noOfChunks;
-        final ActualMessage handshakeMessage = getHandshakeMessage();
-        final ActualMessage bitfieldMessage = getBitfiledMessage(bitfield);
+        final ActualMessage handshakeMessage = getHandshakeMessage(host.getId());
+        final ActualMessage bitfieldMessage = getBitfiledMessage(bitfield, host.getId());
         List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
                 .map(peer -> mapPeerToNeighbour(peer, nChunks, handshakeMessage, bitfieldMessage)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         host.setNeighbours(neighbours);
@@ -97,16 +97,18 @@ public class InitializeHost {
         return set;
     }
 
-    private static ActualMessage getHandshakeMessage() {
+    private static ActualMessage getHandshakeMessage(int hostId) {
         ActualMessage message = new ActualMessage();
         message.setType(MessageType.HANDSHAKE);
+        message.setSenderId(hostId);
         UUID uuid = UUID.randomUUID();
         return message;
     }
 
-    private static ActualMessage getBitfiledMessage(byte[] bitfield) {
+    private static ActualMessage getBitfiledMessage(byte[] bitfield, int hostId) {
         ActualMessage message = new ActualMessage();
         message.setType(MessageType.BITFIELD);
+        message.setSenderId(hostId);
         message.setPayload(bitfield);
         UUID uuid = UUID.randomUUID();
         return message;
