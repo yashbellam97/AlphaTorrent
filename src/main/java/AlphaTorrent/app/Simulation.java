@@ -35,7 +35,9 @@ public class Simulation {
 
     private static void requestChunks(Host host) {
         List<Neighbour> neighbours = host.getNeighbours();
-        for (Neighbour neighbour: neighbours) {
+        Iterator it = neighbours.iterator();
+        while (it.hasNext()) {
+            neighbour = it.next();
             if (!neighbour.isChoked()) {
                 Optional<Integer> optionalChunk = host.getMissingChunks()
                         .stream()
