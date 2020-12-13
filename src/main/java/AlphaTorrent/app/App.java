@@ -30,5 +30,6 @@ public class App {
 
 //        Thread.sleep(30000);
         Simulation.simulate();
+        System.out.println("Transfer complete!");
     }
 }

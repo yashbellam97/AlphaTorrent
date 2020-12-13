@@ -29,6 +29,9 @@ public class Simulation {
             if (!host.isHasFile() && host.getChunks().size() == 67) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
+
+                Thread.sleep(10000);
+
                 for (Neighbour neighbour : host.getNeighbours()) {
                     ActualMessage message = new ActualMessage();
 
