@@ -12,6 +12,7 @@ public class OperationFactory {
     private static Operation notInterested = new NotInterested();
     private static Operation piece = new Piece();
     private static Operation request = new Request();
+    private static Operation handshake = new Handshake();
 
     public static Operation getOperation(MessageType messageType) {
         switch (messageType) {
@@ -31,6 +32,8 @@ public class OperationFactory {
                 return piece;
             case REQUEST:
                 return request;
+            case HANDSHAKE:
+                return handshake;
         }
         return null;
     }
