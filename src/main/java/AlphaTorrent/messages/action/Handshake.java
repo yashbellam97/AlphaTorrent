@@ -14,6 +14,6 @@ public class Handshake implements Operation{
                 .filter(neigh -> actualMessage.getSenderId() == neigh.getId())
                 .findFirst()
                 .get();
-        Logger.write("Received handshake from: ", neighbour.getId());
+        Logger.write("Received handshake from: "+ neighbour.getId(), host.getId());
     }
 }
