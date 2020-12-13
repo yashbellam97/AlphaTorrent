@@ -29,7 +29,23 @@ public class Simulation {
             if (!host.isHasFile() && host.getChunks().size() == 67) {
                 host.setHasFile(Boolean.TRUE);
                 ChunksUtility.generateFileFromBytes(host.getChunks(), host.getId());
+                for (Neighbour neighbour : host.getNeighbours()) {
+                    ActualMessage message = new ActualMessage();
+
+                    message.setType(MessageType.HAVE);
+                    message.setSenderId(host.getId());
+
+                    Sender.send(neighbour.getHost(), neighbour.getPort(), message);
+                }
             }
+
+            boolean everyNeighbourHas = true;
+
+            for (Neighbour neighbour : host.getNeighbours()) {
+                if (!neighbour.isHasFile) everyNeighbourHas = false;               
+            }
+            
+            if (host.isHasFile && everyNeighbourHas) break;
         }
     }
 
