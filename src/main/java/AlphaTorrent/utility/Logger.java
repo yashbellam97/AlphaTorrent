@@ -9,15 +9,12 @@ public class Logger {
         File logFile;
         File logFileCopy;
         try {
-            logFile = new File("resources/" + peerID +  "/log.txt");
+            logFile = new File("resources/" + peerID +  "log.txt");
             logFileCopy = new File("resources/log.txt");
             if (logFile.createNewFile()) {
                 System.out.println("[" + new java.util.Date() + "] " + "Log file created!");
             }
-            if (logFileCopy.createNewFile()) {
-                System.out.println("[" + new java.util.Date() + "] " + "Log file created!");
-            }
-            FileWriter logWriter = new FileWriter("resources/" + peerID + "/log.txt", true);
+            FileWriter logWriter = new FileWriter("resources/" + peerID + "log.txt", true);
             FileWriter logWriterCopy = new FileWriter("resources/log.txt", true);
             if (details.startsWith("Chunks")) logWriterCopy.write(details + "\n");
             else logWriter.write("[" + new java.util.Date() + "] " + details + "\n");
