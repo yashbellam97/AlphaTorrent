@@ -37,7 +37,7 @@ public class Simulation {
         List<Neighbour> neighbours = host.getNeighbours();
         Iterator it = neighbours.iterator();
         while (it.hasNext()) {
-            neighbour = it.next();
+            Neighbour neighbour = it.next();
             if (!neighbour.isChoked()) {
                 Optional<Integer> optionalChunk = host.getMissingChunks()
                         .stream()
