@@ -42,10 +42,10 @@ public class Simulation {
             boolean everyNeighbourHas = true;
 
             for (Neighbour neighbour : host.getNeighbours()) {
-                if (!neighbour.isHasFile) everyNeighbourHas = false;               
+                if (!neighbour.isHasFile()) everyNeighbourHas = false;               
             }
-            
-            if (host.isHasFile && everyNeighbourHas) break;
+
+            if (host.isHasFile() && everyNeighbourHas) break;
         }
     }
 
