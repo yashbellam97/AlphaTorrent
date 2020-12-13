@@ -16,7 +16,7 @@ public class Interested implements Operation{
                 .findFirst()
                 .get();
         neighbour.setPeerInterested(Boolean.TRUE);
-        Logger.write("Received interested message", neighbour.getId());
+        Logger.write("Received interested message from neighbour: " + neighbour.getId(), host.getId());
 
     }
 }

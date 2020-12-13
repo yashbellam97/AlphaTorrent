@@ -28,6 +28,6 @@ public class Have implements Operation{
         message.setSenderId(host.getId());
         Sender.send(neighbour.getHost(), neighbour.getPort(), message);
         //do nothing
-        // Logger.write("Received bitfield message", neighbour.getId());
+        Logger.write("Received have message from neighbour: " + neighbour.getId(), host.getId());
     }
 }

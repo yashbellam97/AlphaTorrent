@@ -16,6 +16,6 @@ public class Unchoke implements Operation{
                 .findFirst()
                 .get();
         neighbour.setChokedFromPeer(Boolean.FALSE);
-        Logger.write("Received unchoke message", neighbour.getId());
+        Logger.write("Received unchoke message from neighbour: " + neighbour.getId(), host.getId());
     }
 }

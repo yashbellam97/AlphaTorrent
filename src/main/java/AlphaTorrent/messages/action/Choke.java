@@ -16,6 +16,6 @@ public class Choke implements Operation{
                 .findFirst()
                 .get();
         neighbour.setChokedFromPeer(Boolean.TRUE);
-        Logger.write("Received choke message", neighbour.getId());
+        Logger.write("Received choke message from neighbour: " + neighbour.getId(), host.getId());
     }
 }

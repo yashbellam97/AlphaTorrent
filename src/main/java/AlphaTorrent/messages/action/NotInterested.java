@@ -16,6 +16,6 @@ public class NotInterested implements Operation{
                 .findFirst()
                 .get();
         neighbour.setPeerInterested(Boolean.FALSE);
-        Logger.write("Received not interested message", neighbour.getId());
+        Logger.write("Received not interested message from neighbour: " + neighbour.getId(), host.getId());
     }
 }

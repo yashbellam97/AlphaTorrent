@@ -21,7 +21,7 @@ public class Bitfield implements Operation{
         .findFirst()
         .get();
         neighbour.setBitfield(actualMessage.getPayload());
-        Logger.write("Received bitfield message", neighbour.getId());
+        Logger.write("Received bitfield message from neighbour: " + neighbour.getId(), host.getId());
         Set<Integer> missingChunks = host.getMissingChunks();
         boolean interesting = missingChunks.stream().anyMatch(e ->  ByteArrayExt.getBit(actualMessage.getPayload(),e));
         ActualMessage message = new ActualMessage();

@@ -20,7 +20,7 @@ public class Request implements Operation{
                 .findFirst()
                 .get();
         System.out.println("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId());
-        Logger.write("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId(), neighbour.getId());
+        Logger.write("Request received with id: "+actualMessage.getLength()+" from: "+ actualMessage.getSenderId(), host.getId());
 //        TaskManager.tasks.add(new Task(actualMessage.getSenderId(), actualMessage.getLength()));
 //        Task task = tasks.remove();
         ActualMessage message = new ActualMessage();
