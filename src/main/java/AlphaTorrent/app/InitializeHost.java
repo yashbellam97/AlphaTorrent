@@ -63,14 +63,6 @@ public class InitializeHost {
         List<Neighbour> neighbours = ConfigLoader.getPeerList().stream().filter(e -> !e.getHostName().equals(hn))
                 .map(peer -> mapPeerToNeighbour(peer, nChunks, handshakeMessage, bitfieldMessage)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         host.setNeighbours(neighbours);
-
-        ObjectMapper ob = new ObjectMapper();
-        System.out.println("Peer configuration set");
-        try {
-            System.out.println(ob.writeValueAsString(host));
-        } catch(Exception e) {
-
-        }
     }
 
     private static Neighbour mapPeerToNeighbour(PeerInfo peerInfo, Integer noOfChunks, ActualMessage handshakeMessage, ActualMessage bitfieldMessage) {
